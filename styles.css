@@ -1,0 +1,14 @@
+h1 {
+    color: blue;
+    text-align: center;
+    font-size: xx-large;
+}
+p {
+    text-align: center;
+    font-size: x-large;
+}
+img {
+    height: 100px;
+    width: 50px;
+    text-align: center;
+}
