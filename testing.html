@@ -65,7 +65,7 @@
                 let snowflakes = document.querySelectorAll(".snowflake")
                 snowflakes.style.animationFillMode = "forwards";
                 snowflakes.style.animationName = "fadeout";
-                snowflakes.style.animationDuration = "10s";
+                snowflakes.style.animationDuration = "8s";
             }
             
             // Function to create and animate snowflakes
@@ -79,7 +79,7 @@
                     
                     // Random properties for each snowflake
                     snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-                    snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // Random fall speed (5s to 10s)
+                    snowflake.style.animationDuration = (Math.random() * 3 + 8) + 's'; // Random fall speed (5s to 10s)
                     snowflake.style.animationDelay = Math.random() * 2 + 's'; // Staggered start
                     snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px'; // Random size
                     snowflake.innerText = snowflakeCharacters[Math.floor(Math.random() * snowflakeCharacters.length)];
@@ -98,7 +98,7 @@
             // Start snowfall with batches every few seconds
             function startSnowfall() {
                 createSnowflakes();
-                setInterval(createSnowflakes, 1000); // New snowflakes every 2 seconds
+                setInterval(createSnowflakes, 3000); // New snowflakes every 2 seconds
                 fall()
             }
 
