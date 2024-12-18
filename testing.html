@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Snowflakes</title>
+    <style>
+        /* General reset and full screen setup */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #1e1f26; /* Dark background for snow visibility */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Snowflake styles */
+        .snowflake {
+            position: absolute;
+            top: -10px; /* Start slightly above the viewport */
+            color: #ffffff;
+            font-size: 12px;
+            opacity: 0.8;
+            user-select: none;
+            pointer-events: none;
+            animation: drift ease-in-out infinite;
+        }
+
+        /* Falling animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(0vh); /* Start at top */
+            }
+            100% {
+                transform: translateY(110vh); /* Fall to the bottom of the viewport */
+            }
+        }
+
+        /* Sideways drifting animation */
+        @keyframes drift {
+            0%, 100% {
+                transform: translateX(0); /* No drift */
+            }
+            50% {
+                transform: translateX(20px); /* Drift slightly to the right */
+            }
+        }
+
+        @keyframes fadeout {
+            0% {
+                opacity: 100%;
+            }
+            100% {
+                opacity: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function escape() {
+                let snowflakes = document.querySelectorAll(".snowflake")
+                snowflakes.style.animationFillMode = "forwards";
+                snowflakes.style.animationName = "fadeout";
+                snowflakes.style.animationDuration = "10s";
+            }
+            
+            // Function to create and animate snowflakes
+            function createSnowflakes() {
+                const numberOfFlakes = 20; // Number of snowflakes
+                const snowflakeCharacters = ['❄', '✻', '❅', '❆', '⛄']; // Different snowflake symbols
+
+                for (let i = 0; i < numberOfFlakes; i++) {
+                    const snowflake = document.createElement('div');
+                    snowflake.classList.add('snowflake');
+                    
+                    // Random properties for each snowflake
+                    snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                    snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // Random fall speed (5s to 10s)
+                    snowflake.style.animationDelay = Math.random() * 2 + 's'; // Staggered start
+                    snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px'; // Random size
+                    snowflake.innerText = snowflakeCharacters[Math.floor(Math.random() * snowflakeCharacters.length)];
+
+                    document.body.appendChild(snowflake);
+
+                    let snowflakes = document.querySelectorAll('.snowflake')
+                    snowflakes.forEach(element => {
+                        element.style.animationFillMode = "forwards";
+                        element.style.animationName = "fall";
+                        element.style.animationDuration = "10s";
+                    })
+                }
+            }
+
+            // Start snowfall with batches every few seconds
+            function startSnowfall() {
+                createSnowflakes();
+                setInterval(createSnowflakes, 1000); // New snowflakes every 2 seconds
+                fall()
+            }
+
+            window.onload = startSnowfall; // Start the snowfall on page load
+        })
+    </script>
+</body>
+</html>
